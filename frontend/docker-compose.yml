@@ -15,7 +15,7 @@ services:
     ports:
       - 3000:3000
     command: >
-      sh -c "yarn install && yarn run dev"
+      ${NODE_COMMAND}
     environment:
       - ENV_HOST:0.0.0.0
       - VIRTUAL_HOST=${BASE_DOMAIN},www.${BASE_DOMAIN}

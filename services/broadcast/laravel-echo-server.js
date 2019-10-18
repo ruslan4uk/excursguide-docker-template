@@ -13,7 +13,7 @@ echo.run(
         "database": "redis",
         "databaseConfig": {
             "redis": {
-                "host": "redis",
+                "host": "services_redis",
                 "port": "6379",
                 "password": "662055"
             },
@@ -22,7 +22,7 @@ echo.run(
             }
         },
         "devMode": false,
-        "host": "echo",
+        "host": "services_echo",
         "port": "6001",
         "protocol": "http",
         "socketio": {},
