@@ -1,0 +1,46 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: network
+
+services:
+  proxy:
+    container_name: proxy
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost.d:/etc/nginx/vhost.d
+      - ./nginx/proxy.conf:/etc/nginx/proxy.conf
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  proxy-letsencrypt:
+    container_name: proxy-letsencrypt
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+
+  redirect:
+    container_name: proxy-redirect
+    image: morbz/docker-web-redirect
+    restart: always
+    environment:
+      - VIRTUAL_HOST=www.${BASE_DOMAIN}
+      - REDIRECT_TARGET=${BASE_DOMAIN}
+
+volumes:
+  certs:
+  vhost.d:
+  html:

@@ -1,0 +1,17 @@
+.env
+.idea
+
+/backend/.env
+/backend/src/*
+
+/frontend/.env
+/frontend/src/*
+
+/proxy/.env
+
+/services/.env
+/services/storage/mysql/data/
+/services/storage/redis/data/
+
+/services/broadcast/node_modules/
+/services/broadcast/yarn.lock

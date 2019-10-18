@@ -1,0 +1,27 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: network
+
+services:
+  nginx:
+    image: nginx:1.17
+    restart: always
+    working_dir: /usr/share/nginx/html
+    volumes:
+      - ./src:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    environment:
+      - VIRTUAL_HOST=api.${BASE_DOMAIN}
+      - LETSENCRYPT_HOST=api.${BASE_DOMAIN}
+      - LETSENCRYPT_EMAIL=rusel91@idz.ru
+
+  php:
+    build: ./php
+    restart: always
+    volumes:
+      - ./src:/usr/share/nginx/html
+    working_dir: /usr/share/nginx/html
+

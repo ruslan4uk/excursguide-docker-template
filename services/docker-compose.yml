@@ -1,0 +1,50 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: network
+
+services:
+  db:
+    image: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./storage/mysql/data:/var/lib/mysql
+
+  redis:
+    image: redis:5.0-alpine
+    restart: always
+    ports:
+      - 6370:6379 # 6379 in use reg ru server
+    volumes:
+      - ./storage/redis/data:/data
+    command: ["sh", "-c", "exec redis-server --requirepass \"${REDIS_PASSWORD}\""]
+
+  echo:
+    image: node:11.13.0-alpine
+    container_name: echo_app
+    volumes:
+      - ./broadcast:/src
+    working_dir: /src
+    ports:
+      - 6001:6001
+    command: >
+      sh -c "yarn install && node laravel-echo-server.js"
+    environment:
+      - VIRTUAL_HOST=ws.${BASE_DOMAIN}
+      - LETSENCRYPT_HOST=ws.${BASE_DOMAIN}
+      - LETSENCRYPT_EMAIL=rusel91@idz.ru
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - VIRTUAL_HOST=egdb.${BASE_DOMAIN}
+      - LETSENCRYPT_HOST=egdb.${BASE_DOMAIN}
+      - LETSENCRYPT_EMAIL=rusel91@idz.ru
