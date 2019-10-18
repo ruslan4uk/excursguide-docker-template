@@ -8,6 +8,7 @@ networks:
 services:
   db:
     image: mysql
+    container_name: services_db
     restart: always
     command: --default-authentication-plugin=mysql_native_password
     environment:
@@ -17,6 +18,7 @@ services:
 
   redis:
     image: redis:5.0-alpine
+    container_name: services_redis
     restart: always
     ports:
       - 6370:6379 # 6379 in use reg ru server
@@ -26,7 +28,7 @@ services:
 
   echo:
     image: node:11.13.0-alpine
-    container_name: echo_app
+    container_name: services_echo
     volumes:
       - ./broadcast:/src
     working_dir: /src
