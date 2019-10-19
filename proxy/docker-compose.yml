@@ -17,6 +17,7 @@ services:
       - certs:/etc/nginx/certs
       - vhost.d:/etc/nginx/vhost.d
       - ./nginx/proxy.conf:/etc/nginx/proxy.conf
+      - ./nginx/default_location:/etc/nginx/vhost.d/default_location
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
