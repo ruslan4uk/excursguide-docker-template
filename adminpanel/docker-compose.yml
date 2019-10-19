@@ -1,0 +1,22 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: network
+
+services:
+  adminpanel:
+    image: node:11.13.0-alpine
+    container_name: adminpanel
+    volumes:
+      - ./src:/app
+    working_dir: /app
+    ports:
+      - 3001:3000
+    command: sh -c "yarn install && yarn run dev"
+    environment:
+      - ENV_HOST:0.0.0.0
+      - VIRTUAL_HOST=eg-admin.${BASE_DOMAIN}
+      - LETSENCRYPT_HOST=eg-admin.${BASE_DOMAIN}
+      - LETSENCRYPT_EMAIL=rusel91@idz.ru
