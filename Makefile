@@ -10,6 +10,7 @@ copy-env:
 up-proxy:
 	cd proxy && docker-compose up --build -d
 
+# composer install and config permission
 up-backend:
 	cd backend && docker-compose up --build -d && docker-compose exec php composer install && sudo chown -R www-data:www-data .
 
