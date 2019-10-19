@@ -10,12 +10,11 @@ services:
     image: node:11.13.0-alpine
     container_name: nuxt
     volumes:
-      - ./src:/src
-    working_dir: /src
+      - ./src:/app
+    working_dir: /app
     ports:
       - 3000:3000
-    command: >
-      ${NODE_COMMAND}
+    command: sh -c "${NODE_COMMAND}"
     environment:
       - ENV_HOST:0.0.0.0
       - VIRTUAL_HOST=${BASE_DOMAIN},www.${BASE_DOMAIN}
