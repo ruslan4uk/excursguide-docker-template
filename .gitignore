@@ -1,13 +1,16 @@
 .env
 .idea
 
+/proxy/.env
+
 /backend/.env
 /backend/src/*
 
 /frontend/.env
 /frontend/src/*
 
-/proxy/.env
+/adminpanel/.env
+/adminpanel/src/*
 
 /services/.env
 /services/storage/mysql/data/
