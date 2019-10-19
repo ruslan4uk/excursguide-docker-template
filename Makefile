@@ -11,7 +11,7 @@ up-proxy:
 	cd proxy && docker-compose up --build -d
 
 up-backend:
-	cd backend && docker-compose up --build -d && docker-compose exec php composer install
+	cd backend && docker-compose up --build -d && docker-compose exec php composer install && sudo chown -R www-data:www-data .
 
 up-frontend:
 	cd frontend && docker-compose up --build -d
