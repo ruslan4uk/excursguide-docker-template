@@ -4,13 +4,13 @@
 /proxy/.env
 
 /backend/.env
-/backend/src/*
+/backend/src/
 
 /frontend/.env
-/frontend/src/*
+/frontend/src/
 
 /adminpanel/.env
-/adminpanel/src/*
+/adminpanel/src/
 
 /services/.env
 /services/storage/mysql/data/

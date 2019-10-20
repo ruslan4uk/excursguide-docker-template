@@ -1,8 +1,5 @@
 FROM php:7.3-fpm
 
-#USER 1000:1000
-#ENV COMPOSER_ALLOW_SUPERUSER 1
-
 RUN apt-get update && apt-get install -y \
         zip \
         unzip\
