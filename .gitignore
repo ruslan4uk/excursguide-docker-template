@@ -18,3 +18,6 @@
 
 /services/broadcast/node_modules/
 /services/broadcast/yarn.lock
+
+/admin_nuxt
+/admin_nuxt/*

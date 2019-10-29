@@ -25,6 +25,8 @@ up-services:
 
 up-all: copy-env up-backend up-frontend up-adminpanel up-services
 
+up-back: copy-env up-backend up-adminpanel up-services
+
 # Stop container
 stop-proxy:
 	cd proxy && docker-compose stop
@@ -43,5 +45,11 @@ stop-services:
 
 stop-all: stop-backend stop-frontend stop-adminpanel stop-services
 
+stop-back: stop-backend stop-adminpanel stop-services
+
 restart-all: stop-backend stop-frontend stop-adminpanel stop-services \
 			copy-env up-backend up-frontend up-adminpanel up-services
+
+
+backend-exec:
+	cd backend && docker-compose exec php bash
